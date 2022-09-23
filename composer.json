@@ -1,0 +1,21 @@
+{
+  "name": "app/php-5.6-no-framework-application",
+  "description": "A simple PHP5.6 Application Built Without a Framework",
+  "keywords": [],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Francesco Bilotta",
+      "email": "bilottafrancesco.business@gmail.com",
+      "role": "Creator / Main Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Src\\": "src/"
+    }
+  }
+}
