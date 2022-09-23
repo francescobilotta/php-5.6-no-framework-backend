@@ -1,5 +1,4 @@
 <?php
-// declare(strict_types=1);
 
 namespace App;
 
@@ -30,16 +29,14 @@ foreach ($response->getHeaders() as $header) {
     header($header, false);
 }
 
-$dispatcher = \FastRoute\simpleDispatcher(function (
-    \FastRoute\RouteCollector $r
-) {
-    $r->addRoute('GET', '/hello-world', function () {
-        echo 'Hello World';
-    });
-    $r->addRoute('GET', '/another-route', function () {
-        echo 'This works too';
-    });
-});
+$routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
+    $routes = include 'Routes.php';
+    foreach ($routes as $route) {
+        $r->addRoute($route[0], $route[1], $route[2]);
+    }
+};
+
+$dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 
 $httpMethod = $request->getMethod();
 $uri = $request->getPath();
