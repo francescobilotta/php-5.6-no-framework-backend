@@ -8,6 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 error_reporting(E_ALL);
 
 $environment = 'development';
+$prefixPath = '/php-5.6-no-framework-application/public/index.php';
 
 /**
  * Register the error handler
@@ -22,6 +23,44 @@ if ($environment !== 'production') {
 }
 $whoops->register();
 
-throw new \Exception();
+$request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
+$response = new \Http\HttpResponse();
 
-// echo 'hello';
+foreach ($response->getHeaders() as $header) {
+    header($header, false);
+}
+
+$dispatcher = \FastRoute\simpleDispatcher(function (
+    \FastRoute\RouteCollector $r
+) {
+    $r->addRoute('GET', '/hello-world', function () {
+        echo 'Hello World';
+    });
+    $r->addRoute('GET', '/another-route', function () {
+        echo 'This works too';
+    });
+});
+
+$httpMethod = $request->getMethod();
+$uri = $request->getPath();
+$uri = str_replace($prefixPath, '', $uri);
+
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+
+switch ($routeInfo[0]) {
+    case \FastRoute\Dispatcher::NOT_FOUND:
+        $response->setContent('404 - Page not found');
+        $response->setStatusCode(404);
+        break;
+    case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $response->setContent('405 - Method not allowed');
+        $response->setStatusCode(405);
+        break;
+    case \FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        call_user_func($handler, $vars);
+        break;
+}
+
+echo $response->getContent();
