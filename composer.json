@@ -1,6 +1,6 @@
 {
-  "name": "app/php-5.6-no-framework-application",
-  "description": "A simple PHP5.6 Application Built Without a Framework",
+  "name": "app/php-5.6-no-framework-backend",
+  "description": "A simple PHP5.6 Backend Built Without a Framework",
   "keywords": [],
   "license": "MIT",
   "authors": [

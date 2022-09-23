@@ -7,7 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 error_reporting(E_ALL);
 
 $environment = 'development';
-$prefixPath = '/php-5.6-no-framework-application/public/index.php';
+$prefixPath = '/php-5.6-no-framework-backend/public/index.php';
 
 /**
  * Register the error handler

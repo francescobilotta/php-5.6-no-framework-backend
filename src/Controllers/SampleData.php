@@ -20,7 +20,6 @@ class SampleData
     {
         //$content = '<h1>Hello World</h1>';
         //$content .= 'Hello ' . $this->request->getParameter('name', 'stranger');
-        //http://localhost/php-5.6-no-framework-application/public/index.php/?name=Arthur%20Dent
         $data = [
             'a',
             'b',
