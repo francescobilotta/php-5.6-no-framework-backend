@@ -1,3 +1,3 @@
 <?php
 
-return [['GET', '/', ['App\Controllers\Homepage', 'show']]];
+return [['GET', '/', ['App\Controllers\SampleData', 'show']]];
