@@ -30,5 +30,5 @@ For example this url: http://localhost/php-5.6-no-framework-backend/public/index
 The \$prefixPath is http://localhost/php-5.6-no-framework-backend/public/index.php
 
 ## How to use it?
-
+Run: composer update
 Visit http://localhost/your-folder/public/index.php/?name=your%20name as an example.
